@@ -8,12 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="..\..\azureSearch\index.json" Link="AISearchConfiguration\index.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\..\azureSearch\index.json" Link="AISearchConfiguration\datasource.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="..\..\azureSearch\datasource.json" Link="AISearchConfiguration\datasource.json" />
+    <Content Include="..\..\azureSearch\index.json" Link="AISearchConfiguration\index.json" />
   </ItemGroup>
 
   <ItemGroup>
@@ -28,7 +24,7 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
- <ItemGroup>
+  <ItemGroup>
     <Folder Include="AISearchConfiguration\" />
   </ItemGroup>
 
