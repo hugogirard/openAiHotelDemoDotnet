@@ -8,8 +8,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="..\..\azureSearch\datasource.json" Link="AISearchConfiguration\datasource.json" />
-    <Content Include="..\..\azureSearch\index.json" Link="AISearchConfiguration\index.json" />
+    <Content Include="..\..\azureSearch\datasource.json" Link="AISearchConfiguration\datasource.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\azureSearch\index.json" Link="AISearchConfiguration\index.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
