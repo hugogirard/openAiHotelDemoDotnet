@@ -22,7 +22,7 @@ jobs:
           dotnet-version: '8.0.x' 
           
       - name: Build utility helper
-        run: dotnet build  .\devOpsTool.csproj --configuration Release --output ..\..\..\artefact
+        run: dotnet build  .\devOpsTool.csproj --configuration Release --output ..\..\artefact
         working-directory: .\src\devOpsTool
         
       - name: Create Indexation
