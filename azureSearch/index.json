@@ -1,0 +1,250 @@
+{
+    "@odata.context": "https://search-mihbslf3ztslc.search.windows.net/$metadata#indexes/$entity",
+    "@odata.etag": "\"0x8DC3EB9C2093A5B\"",
+    "name": "hotels-vector-quickstart",
+    "defaultScoringProfile": null,
+    "fields": [
+        {
+            "name": "HotelId",
+            "type": "Edm.String",
+            "searchable": false,
+            "filterable": true,
+            "retrievable": true,
+            "sortable": false,
+            "facetable": false,
+            "key": true,
+            "indexAnalyzer": null,
+            "searchAnalyzer": null,
+            "analyzer": null,
+            "dimensions": null,
+            "vectorSearchProfile": null,
+            "synonymMaps": []
+        },
+        {
+            "name": "HotelName",
+            "type": "Edm.String",
+            "searchable": true,
+            "filterable": false,
+            "retrievable": true,
+            "sortable": true,
+            "facetable": false,
+            "key": false,
+            "indexAnalyzer": null,
+            "searchAnalyzer": null,
+            "analyzer": null,
+            "dimensions": null,
+            "vectorSearchProfile": null,
+            "synonymMaps": []
+        },
+        {
+            "name": "HotelNameVector",
+            "type": "Collection(Edm.Single)",
+            "searchable": true,
+            "filterable": false,
+            "retrievable": true,
+            "sortable": false,
+            "facetable": false,
+            "key": false,
+            "indexAnalyzer": null,
+            "searchAnalyzer": null,
+            "analyzer": null,
+            "dimensions": 1536,
+            "vectorSearchProfile": "my-vector-profile",
+            "synonymMaps": []
+        },
+        {
+            "name": "Description",
+            "type": "Edm.String",
+            "searchable": true,
+            "filterable": false,
+            "retrievable": true,
+            "sortable": false,
+            "facetable": false,
+            "key": false,
+            "indexAnalyzer": null,
+            "searchAnalyzer": null,
+            "analyzer": null,
+            "dimensions": null,
+            "vectorSearchProfile": null,
+            "synonymMaps": []
+        },
+        {
+            "name": "DescriptionVector",
+            "type": "Collection(Edm.Single)",
+            "searchable": true,
+            "filterable": false,
+            "retrievable": true,
+            "sortable": false,
+            "facetable": false,
+            "key": false,
+            "indexAnalyzer": null,
+            "searchAnalyzer": null,
+            "analyzer": null,
+            "dimensions": 1536,
+            "vectorSearchProfile": "my-vector-profile",
+            "synonymMaps": []
+        },
+        {
+            "name": "Category",
+            "type": "Edm.String",
+            "searchable": true,
+            "filterable": true,
+            "retrievable": true,
+            "sortable": true,
+            "facetable": true,
+            "key": false,
+            "indexAnalyzer": null,
+            "searchAnalyzer": null,
+            "analyzer": null,
+            "dimensions": null,
+            "vectorSearchProfile": null,
+            "synonymMaps": []
+        },
+        {
+            "name": "Tags",
+            "type": "Collection(Edm.String)",
+            "searchable": true,
+            "filterable": true,
+            "retrievable": true,
+            "sortable": false,
+            "facetable": true,
+            "key": false,
+            "indexAnalyzer": null,
+            "searchAnalyzer": null,
+            "analyzer": null,
+            "dimensions": null,
+            "vectorSearchProfile": null,
+            "synonymMaps": []
+        },
+        {
+            "name": "Address",
+            "type": "Edm.ComplexType",
+            "fields": [
+                {
+                    "name": "City",
+                    "type": "Edm.String",
+                    "searchable": true,
+                    "filterable": true,
+                    "retrievable": true,
+                    "sortable": true,
+                    "facetable": true,
+                    "key": false,
+                    "indexAnalyzer": null,
+                    "searchAnalyzer": null,
+                    "analyzer": null,
+                    "dimensions": null,
+                    "vectorSearchProfile": null,
+                    "synonymMaps": []
+                },
+                {
+                    "name": "StateProvince",
+                    "type": "Edm.String",
+                    "searchable": true,
+                    "filterable": true,
+                    "retrievable": true,
+                    "sortable": true,
+                    "facetable": true,
+                    "key": false,
+                    "indexAnalyzer": null,
+                    "searchAnalyzer": null,
+                    "analyzer": null,
+                    "dimensions": null,
+                    "vectorSearchProfile": null,
+                    "synonymMaps": []
+                }
+            ]
+        },
+        {
+            "name": "Location",
+            "type": "Edm.GeographyPoint",
+            "searchable": false,
+            "filterable": true,
+            "retrievable": true,
+            "sortable": true,
+            "facetable": false,
+            "key": false,
+            "indexAnalyzer": null,
+            "searchAnalyzer": null,
+            "analyzer": null,
+            "dimensions": null,
+            "vectorSearchProfile": null,
+            "synonymMaps": []
+        }
+    ],
+    "scoringProfiles": [],
+    "corsOptions": null,
+    "suggesters": [],
+    "analyzers": [],
+    "tokenizers": [],
+    "tokenFilters": [],
+    "charFilters": [],
+    "encryptionKey": null,
+    "similarity": {
+        "@odata.type": "#Microsoft.Azure.Search.BM25Similarity",
+        "k1": null,
+        "b": null
+    },
+    "vectorSearch": {
+        "algorithms": [
+            {
+                "name": "my-hnsw-vector-config-1",
+                "kind": "hnsw",
+                "hnswParameters": {
+                    "metric": "cosine",
+                    "m": 4,
+                    "efConstruction": 400,
+                    "efSearch": 500
+                },
+                "exhaustiveKnnParameters": null
+            },
+            {
+                "name": "my-hnsw-vector-config-2",
+                "kind": "hnsw",
+                "hnswParameters": {
+                    "metric": "euclidean",
+                    "m": 4,
+                    "efConstruction": 400,
+                    "efSearch": 500
+                },
+                "exhaustiveKnnParameters": null
+            },
+            {
+                "name": "my-eknn-vector-config",
+                "kind": "exhaustiveKnn",
+                "hnswParameters": null,
+                "exhaustiveKnnParameters": {
+                    "metric": "cosine"
+                }
+            }
+        ],
+        "profiles": [
+            {
+                "name": "my-vector-profile",
+                "algorithm": "my-hnsw-vector-config-1"
+            }
+        ]
+    },
+    "semantic": {
+        "defaultConfiguration": null,
+        "configurations": [
+            {
+                "name": "my-semantic-config",
+                "prioritizedFields": {
+                    "titleField": {
+                        "fieldName": "HotelName"
+                    },
+                    "prioritizedContentFields": [
+                        {
+                            "fieldName": "Description"
+                        }
+                    ],
+                    "prioritizedKeywordsFields": [
+                        {
+                            "fieldName": "Tags"
+                        }
+                    ]
+                }
+            }
+        ]
+    }
+}

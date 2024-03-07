@@ -1,0 +1,30 @@
+name: Create indexing
+
+on:
+  workflow_dispatch:
+
+jobs:
+  indexing:
+    runs-on: windows-latest
+    env:
+      AISEARCH_VERSION: ${{ secrets.AISEARCH_VERSION }}
+      AISEARCH_ENDPOINT: ${{ secrets.AISEARCH_ENDPOINT }}
+      AISEARCH_APIKEY: ${{ secrets.AISEARCH_APIKEY }}
+      INDEX_NAME: ${{ secrets.INDEX_NAME }}
+      
+    steps:
+
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.0.x' 
+          
+      - name: Build utility helper
+        run: dotnet build  .\devOpsTool.csproj --configuration Release --output ..\..\..\artefact
+        working-directory: .\src\devOpsTool
+        
+      - name: Create Indexation
+        run: .\devOpsTool.exe
+        working-directory: .\artefact        
