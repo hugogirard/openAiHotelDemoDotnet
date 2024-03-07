@@ -33,5 +33,12 @@ jobs:
           subscriptionId: ${{ secrets.SUBSCRIPTION_ID }}
           scope: subscription
           region: ${{ env.LOCATION }}
-          template: ./bicep/main.bicep          
+          template: ./bicep/main.bicep     
+          
+      - uses: gliech/create-github-secret-action@v1
+        name: Write function app name
+        with:
+          name: FUNCTIONAPP_NAME
+          value: ${{ steps.createResources.outputs.functionName }}
+          pa_token: ${{ secrets.PA_TOKEN }}            
         
