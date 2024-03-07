@@ -6,6 +6,10 @@ param location string = 'eastus'
 @description('The name of the resource group to be created')
 param rgName string = 'rg-ai-magic-demo'
 
+param completionModel string = 'gpt-35-turbo'
+
+param embeddingModel string = 'text-embedding-ada-002'
+
 resource rg 'Microsoft.Resources/resourceGroups@2021-04-01' = {
   name: rgName
   location: location
@@ -26,6 +30,17 @@ module search 'modules/cognitive/aisearch.bicep' = {
   scope: resourceGroup(rg.name)
   name: 'search'
   params: {
+    location: location
+    suffix: suffix
+  }
+}
+
+module openAi 'modules/cognitive/openai.bicep' = {
+  scope: resourceGroup(rg.name)
+  name: 'openai'
+  params: {
+    completionModel: completionModel
+    embeddingModel: embeddingModel
     location: location
     suffix: suffix
   }
