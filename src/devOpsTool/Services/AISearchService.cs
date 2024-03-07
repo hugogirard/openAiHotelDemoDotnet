@@ -21,7 +21,7 @@ public class AISearchService : IAISearchService
 
     public async Task CreateIndexingResources()
     {
-        //await CreateDataSource();
+        await CreateDataSource();
 
         await CreateIndex();
 

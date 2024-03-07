@@ -10,6 +10,7 @@ jobs:
       AISEARCH_VERSION: ${{ secrets.AISEARCH_VERSION }}
       AISEARCH_ENDPOINT: ${{ secrets.AISEARCH_ENDPOINT }}
       AISEARCH_APIKEY: ${{ secrets.AISEARCH_APIKEY }}
+      STORAGECNXSTRING: ${{ secrets.STORAGE_CNX_STRING }}
       INDEX_NAME: ${{ secrets.INDEX_NAME }}
       
     steps:
