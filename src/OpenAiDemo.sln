@@ -12,7 +12,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Skillset", "Skillset", "{CF
 		function.http = function.http
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FunctionSkillset", "Skillset\FunctionSkillset\FunctionSkillset.csproj", "{E97D56DE-631A-4884-B57C-45284B603573}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FunctionSkillset", "Skillset\FunctionSkillset\FunctionSkillset.csproj", "{E97D56DE-631A-4884-B57C-45284B603573}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Api", "Api", "{C39F869F-FF01-4DBF-A0ED-2FFF51761C18}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Knowledge.Api", "Api\Knowledge.Api\Knowledge.Api.csproj", "{F4D6ED55-B9D5-4FD6-9C2C-D15FB0A3D2F6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -28,6 +32,10 @@ Global
 		{E97D56DE-631A-4884-B57C-45284B603573}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E97D56DE-631A-4884-B57C-45284B603573}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E97D56DE-631A-4884-B57C-45284B603573}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4D6ED55-B9D5-4FD6-9C2C-D15FB0A3D2F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4D6ED55-B9D5-4FD6-9C2C-D15FB0A3D2F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4D6ED55-B9D5-4FD6-9C2C-D15FB0A3D2F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4D6ED55-B9D5-4FD6-9C2C-D15FB0A3D2F6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -35,6 +43,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{B73A3EAC-0457-494A-A01E-F6575ECDE7E6} = {8C9BD804-2946-4FE8-92C2-E987DBF24751}
 		{E97D56DE-631A-4884-B57C-45284B603573} = {CFCA8A5A-1A5E-4734-B4C4-472E70E0B25E}
+		{F4D6ED55-B9D5-4FD6-9C2C-D15FB0A3D2F6} = {C39F869F-FF01-4DBF-A0ED-2FFF51761C18}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {660D51D6-FC3F-4C7A-A4E5-A148394C263A}
