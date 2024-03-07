@@ -1,4 +1,8 @@
 using System.Net;
+using System.Net.Http.Json;
+using System.Text;
+using System.Text.Json;
+using Azure;
 using FunctionSkillset.Infrastructure;
 using FunctionSkillset.Model;
 using Google.Protobuf.WellKnownTypes;
@@ -46,33 +50,67 @@ namespace FunctionSkillset
             var outputs = new List<OutputHotelVectorizeRecord>();
 
             // Get text embedding connector
-            string openAiResourceName = _configuration["OpenAI:ResourceName"];
-            string openAiDeploymentName = _configuration["OpenAI:DeploymentName"];
-            string openAiVersion = _configuration["OpenAI:Version"];
-            string openAiKey = _configuration["OpenAI:Key"];
+            string openAiResourceName = _configuration["OpenAIResourceName"];
+            string openAiDeploymentName = _configuration["OpenAIDeploymentName"];
+            string openAiVersion = _configuration["OpenAIVersion"];
+            string openAiKey = _configuration["OpenAIKey"];
 
             string postEndpoint = $"https://{openAiResourceName}.openai.azure.com/openai/deployments/{openAiDeploymentName}/embeddings?api-version={openAiVersion}";
 
             foreach (var record in data.Values)
             {
                 try
-                {
+                {                    
                     var http = _httpClientFactory.CreateClient();
                     http.DefaultRequestHeaders.Add("api-key", openAiKey);
-                }
-                catch (Exception ex)
-                {
+                    var (embeddedHotelName,hotelNamErrorMessage) = await GetEmbeddingAsync(postEndpoint, record.Data.HotelName, http);
+                    var (embeddedDescription, DescriptionErrorMessage) = await GetEmbeddingAsync(postEndpoint, record.Data.Description, http);
 
-                    throw;
+                    HotelVectorizeData hotelVector = new(embeddedHotelName, embeddedDescription);
+                    OutputRecordMessage hotelNameRecordMessage = new(hotelNamErrorMessage);
+                    OutputRecordMessage descriptionRecordMessage = new(DescriptionErrorMessage);
+
+                    outputs.Add(new(record.RecordId, 
+                                    hotelVector, 
+                                    new List<OutputRecordMessage> 
+                                    { 
+                                        hotelNameRecordMessage, 
+                                        descriptionRecordMessage 
+                                    }, 
+                                    new List<OutputRecordMessage>()));
+                }
+                catch (Exception e)
+                {
+                    // Something bad happened, log the issue.
+                    var error = new OutputRecordMessage(e.Message);
+
+                    outputs.Add(new(record.RecordId, 
+                                new HotelVectorizeData(new List<double>(), new List<double>()), 
+                                new List<OutputRecordMessage> { error }, 
+                                new List<OutputRecordMessage>()));
                 }
             }
 
-            var response = req.CreateResponse(HttpStatusCode.OK);
-            response.Headers.Add("Content-Type", "text/plain; charset=utf-8");
+            return req.CreateOkRequest(outputs);
+        }
 
-            response.WriteString("Welcome to Azure Functions!");
+        private async Task<(IList<double>, string)> GetEmbeddingAsync(string postEndpoint, string textToEmbed, HttpClient http)
+        {
+            var payload = new { input = textToEmbed };
 
-            return response;
+            var content = new StringContent(JsonSerializer.Serialize(payload), Encoding.UTF8, "application/json");
+            var httpResponse = await http.PostAsync(postEndpoint, content);
+
+            if (httpResponse.IsSuccessStatusCode)
+            {
+                var vectorResponse = await httpResponse.Content.ReadFromJsonAsync<VectorResponse>();
+                return (vectorResponse?.data[0].embedding ?? new List<double>(),
+                        string.Empty);
+            }
+
+            return (new List<double>(), 
+                   $"Cannot get OpenAI embedding error: {httpResponse.ReasonPhrase}");
+            
         }
     }
 }

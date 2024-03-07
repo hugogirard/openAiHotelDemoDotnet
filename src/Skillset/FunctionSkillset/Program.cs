@@ -5,14 +5,11 @@ using Microsoft.Extensions.Hosting;
 
 var host = new HostBuilder()
     .ConfigureFunctionsWorkerDefaults()
-    .ConfigureServices((hostContext, services) =>
+    .ConfigureServices(services =>
     {
         services.AddApplicationInsightsTelemetryWorkerService();
         services.AddHttpClient();
         services.ConfigureFunctionsApplicationInsights();      
-
-        var configuration = hostContext.Configuration;
-
     })
     .Build();
 

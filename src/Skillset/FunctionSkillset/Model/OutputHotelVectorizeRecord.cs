@@ -5,6 +5,6 @@ public record OutputHotelVectorizeRecord(string RecordId,
                                          List<OutputRecordMessage> Errors, 
                                          List<OutputRecordMessage> Warnings);
 
-public record HotelVectorizeData(IList<int> HotelNameVector, IList<int> DescriptionVector);
+public record HotelVectorizeData(IList<double> HotelNameVector, IList<double> DescriptionVector);
 
 public record OutputRecordMessage(string Message);

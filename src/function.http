@@ -1,0 +1,18 @@
+@rootUrl=http://localhost:7176
+
+###
+POST {{rootUrl}}/api/Vectorize
+Content-Type: application/json
+
+{
+    "values": [
+        {
+            "recordId": "1",
+            "data": {
+              "HotelName": "Secret Point Hotel",
+              "Description": "The hotel is ideally located on the main commercial artery of the city in the heart of New York."
+            }
+        }
+    ]
+    
+}
